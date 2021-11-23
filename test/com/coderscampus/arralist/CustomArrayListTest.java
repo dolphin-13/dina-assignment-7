@@ -26,20 +26,22 @@ class CustomArrayListTest {
 	}
 
 	@Test
-	void should_add_11_items_to_list() {
+	void should_add_12_items_to_list() {
 		// Arrange
 		CustomList<Integer> sut = new CustomArrayList<>();
-		for (int i = 1; i <= 10; i++) {
+
+		// Act		
+		for (int i = 1; i <= 12; i++) {
 			sut.add(i);
 		}
 
-		// Act		
-		sut.add(3, 100);
+		// Assert
+		for (int i = 0; i < 11; i++) {
+			assertEquals(i + 1, sut.get(i));
+		}
 		Integer expectedSize = sut.getSize();
-		
-		// Assert		
-		assertEquals(11, expectedSize);
-	}
+		assertEquals(12, expectedSize);		
+	}	
 
 	@Test
 	void should_add_one_item_at_specified_index() {
@@ -58,6 +60,22 @@ class CustomArrayListTest {
 		assertEquals(4, expectedSizeBefore);
 		assertEquals(8, expectedAddedItem);
 		assertEquals(5, expectedSizeAfter);
+	}
+	
+	@Test
+	void should_add_one_item_to_list_at_specified_index_when_size_reached_max_array_length() {
+		// Arrange
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for (int i=1; i<=10; i++) {
+			sut.add(i);			
+		}
+
+		// Act		
+		sut.add(3, 100);
+		
+		//Assert
+		assertEquals(11, sut.getSize());
+		
 	}
 
 	@Test

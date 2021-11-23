@@ -27,7 +27,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 		if (index <= size && index >= 0) {
 			// shift one by one all elements from the end to right by 1 position while i >
 			// index
-			for (int i = size-1; i > index; i--)
+			for (int i = size - 1; i > index; i--)
 				items[i] = items[i - 1];
 			// add item with the index
 			items[index] = item;
