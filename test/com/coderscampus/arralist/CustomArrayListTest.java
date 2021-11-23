@@ -26,21 +26,19 @@ class CustomArrayListTest {
 	}
 
 	@Test
-	void should_add_12_items_to_list() {
+	void should_add_11_items_to_list() {
 		// Arrange
 		CustomList<Integer> sut = new CustomArrayList<>();
-
-		// Act
-		for (int i = 1; i <= 12; i++) {
+		for (int i = 1; i <= 10; i++) {
 			sut.add(i);
 		}
-		Integer expectedSize = sut.getSize();
 
-		// Assert
-		for (int i = 0; i < 11; i++) {
-			assertEquals(i + 1, sut.get(i));
-		}
-		assertEquals(12, expectedSize);
+		// Act		
+		sut.add(3, 100);
+		Integer expectedSize = sut.getSize();
+		
+		// Assert		
+		assertEquals(11, expectedSize);
 	}
 
 	@Test
