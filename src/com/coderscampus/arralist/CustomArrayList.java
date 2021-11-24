@@ -1,5 +1,7 @@
 package com.coderscampus.arralist;
 
+import java.util.Arrays;
+
 public class CustomArrayList<T> implements CustomList<T> {
 	Object[] items = new Object[10];
 	int size = 0;
@@ -13,22 +15,30 @@ public class CustomArrayList<T> implements CustomList<T> {
 		return true;
 	}
 
-	private void growBackingObjectArray() {
-		Object[] oldArray = items;
-		items = new Object[size * 2];
-		for (int i = 0; i < oldArray.length; i++) {
-			items[i] = oldArray[i];
-		}
-
+	private Object[] growBackingObjectArray() {
+//		Object[] oldArray = items;
+//		items = new Object[size * 2];
+//		for (int i = 0; i < oldArray.length; i++) {
+//			items[i] = oldArray[i];
+//		}
+//		return items;
+		Object[] newItems = Arrays.copyOf(items, size * 2);
+		items = newItems;
+		return newItems;
 	}
 
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
+		if (size == items.length) { 
+			items = growBackingObjectArray();
+		}
 		if (index <= size && index >= 0) {
+			
 			// shift one by one all elements from the end to right by 1 position while i >
 			// index
-			for (int i = size - 1; i > index; i--)
+			for (int i = size; i > index; i--)
 				items[i] = items[i - 1];
+			
 			// add item with the index
 			items[index] = item;
 		} else if (index < 0)
@@ -37,6 +47,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
 		size++;
 		return true;
+
 	}
 
 	@Override
