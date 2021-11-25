@@ -73,7 +73,7 @@ class CustomArrayListTest {
 		assertEquals(10, expectedSize);
 
 		// Act
-		sut.add(3, 100);
+		sut.add(10, 100);
 
 		// Assert
 		expectedSize = sut.getSize();		
